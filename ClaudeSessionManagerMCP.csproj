@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>ClaudeSessionManagerMCP</RootNamespace>
+    <AssemblyName>ClaudeSessionManagerMCP</AssemblyName>
+    <Version>1.0.1</Version>
+    <FileVersion>1.0.1</FileVersion>
+    <InformationalVersion>1.0.1</InformationalVersion>
+    <Product>ClaudeSessionManagerMCP</Product>
+    <Description>C# MCP server that lets multiple Claude sessions find each other, message each other, share context/usage stats, warn about heavy context usage, and optionally keep the PC awake while work is running.</Description>
+    <NoWarn>$(NoWarn);MCPEXP001;MCPEXP002;MCPEXP003</NoWarn>
+    <DebugType>embedded</DebugType>
+    <InvariantGlobalization>true</InvariantGlobalization>
+
+    <!-- Single-file publish: dotnet publish -c Release -r win-x64 -->
+    <PublishSingleFile Condition="'$(RuntimeIdentifier)' != ''">true</PublishSingleFile>
+    <SelfContained Condition="'$(RuntimeIdentifier)' != ''">true</SelfContained>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ModelContextProtocol" Version="2.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.12" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- config.ini is optional (gitignored); the app auto-writes defaults next to the exe on first run. -->
+    <None Include="config.ini" CopyToOutputDirectory="PreserveNewest" Condition="Exists('config.ini')" />
+  </ItemGroup>
+
+</Project>

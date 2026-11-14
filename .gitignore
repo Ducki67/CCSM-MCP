@@ -1,0 +1,8 @@
+bin/
+obj/
+publish/
+*.user
+hub.log
+hub.old
+hub-boot.log
+config.ini
